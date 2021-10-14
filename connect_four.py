@@ -185,6 +185,13 @@ def check_board_diagonals_row(board, num_rows, num_columns):
             column += 1
     return "c"
 
+def check_full(board, num_rows, num_columns):
+    for row in range(1, num_rows + 1):
+        for column in range(1, num_columns + 1):
+            pos = str(row) + ',' + str(column)
+            if board[pos] == " ":
+                return "c"
+    return "t"
 
 def check_board(board, num_rows, num_columns):
     status = check_board_rows(board, num_rows, num_columns)
@@ -201,6 +208,10 @@ def check_board(board, num_rows, num_columns):
         return status
     status = check_board_diagonals_row(board, num_rows, num_columns)
     print("checking diagonals row: {status}".format(status = status))
+    if status != "c":
+        return status
+    status = check_full(board, num_rows, num_columns)
+    print("checking full board: {status}".format(status = status))
     if status != "c":
         return status
     return "c"
